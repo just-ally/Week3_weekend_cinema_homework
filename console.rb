@@ -36,7 +36,6 @@ ticket5.save()
 ticket6 = Ticket.new({ 'customer_id' => customer2.id, 'film_id' => film1.id })
 ticket6.save()
 
-
 # customer2.name = 'Gus Fring'
 # customer2.update()
 # customer1.delete_one()
@@ -44,6 +43,13 @@ ticket6.save()
 # film1.title = 'Reservoir Dogs'
 # film1.update()
 # film2.delete_one()
+
+customer1.buy_ticket(film1)
+customer2.buy_ticket(film2)
+customer3.buy_ticket(film2)
+customer4.buy_ticket(film3)
+customer1.buy_ticket(film3)
+customer2.buy_ticket(film1)
 
 customers = Customer.all()
 films = Film.all()

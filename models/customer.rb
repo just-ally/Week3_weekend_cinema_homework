@@ -1,5 +1,5 @@
 require_relative('../db/sql_runner.rb')
-# require_relative('')
+require_relative('./film.rb')
 
 class Customer
 
@@ -55,6 +55,26 @@ class Customer
     films_array = SqlRunner.run(sql, values)
     films = films_array.map { |film_hash| Film.new(film_hash)}
     return films
+  end
+
+  #decreasing customer funds when buying tickets
+  def decrease_funds(film)
+    new_funds = @funds.to_i() - film.price.to_i()
+    return new_funds
+  end
+
+  def buy_ticket(film)
+    @funds = decrease_funds(film)
+    sql = "UPDATE customers SET (name, funds) = ($1, $2) WHERE id = $3"
+    values = [@name, @funds, @id]
+    SqlRunner.run(sql, values)
+  end
+
+  #check how many tickets bought per customer
+  def tickets_bought()
+    tickets_array = films()
+    number_of_tickets = tickets_array.count
+    return "#{@name} has bought #{number_of_tickets} tickets."
   end
 
 end

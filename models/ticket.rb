@@ -51,7 +51,4 @@ class Ticket
     return customer
   end
 
-
-
-
 end

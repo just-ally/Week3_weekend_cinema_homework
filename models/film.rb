@@ -54,6 +54,13 @@ class Film
     customers_array = SqlRunner.run(sql, values)
     customers = customers_array.map { |customer_hash| Customer.new(customer_hash)}
     return customers
-  end 
+  end
+
+  #checking number of customers at one film
+  def customers_attending()
+    customers_array = customers()
+    number_of_customers = customers_array.count
+    return "There will be #{number_of_customers} customers at the screening of #{@title}."
+  end
 
 end
